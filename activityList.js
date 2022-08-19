@@ -1,4 +1,4 @@
-activity_attr_list = {
+export const activityAttrList = {
   badminton: {
     str: 0,
     dex: 1,
