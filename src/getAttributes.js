@@ -1,5 +1,9 @@
 import { activityAttrList } from "./activityList.js";
 
-export function getAttributes(activityName, normalizedUnit) {}
+export function getAttributes(activityName, normalizedUnit) {
+  return activityAttrList.;
+}
 
-export function getUnitOfActivity(activityName, unit) {}
+export function normalizeActivityUnit(activityName, unit) {}
+
+// module.exports = { getAttributes, normalizeActivityUnit };

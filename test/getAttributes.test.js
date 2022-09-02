@@ -1,5 +1,5 @@
-const getAttributes = require("../src/getAttributes");
-const expect = require("chai").expect;
+import { getAttributes, normalizeActivityUnit } from "../src/getAttributes.js";
+import { expect } from "chai";
 
 describe("Test getAttribute", function () {
   it("Get attributes for Running", function () {
