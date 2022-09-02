@@ -1,0 +1,27 @@
+{
+  "name": "livingRPG",
+  "version": "1.0.0",
+  "description": "Library to convert real life activities into characters stats for an RPG.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jtsiva/livingRPG.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jtsiva/livingRPG/issues"
+  },
+  "homepage": "https://github.com/jtsiva/livingRPG#readme",
+  "devdependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0"
+  }
+}

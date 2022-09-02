@@ -1,0 +1,11 @@
+const getAttributes = require("../src/getAttributes");
+const expect = require("chai").expect;
+
+describe("Test getAttribute", function () {
+  it("Get attributes for Running", function () {
+    getAttributes("running", 1).str.should.equal(1);
+    getAttributes("running", 1).dex.should.equal(0);
+    getAttributes("running", 1).foc.should.equal(0);
+    getAttributes("running", 1).vit.should.equal(2);
+  });
+});
