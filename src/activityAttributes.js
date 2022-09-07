@@ -24,6 +24,16 @@ export const activityAttributes = {
       : undefined;
   },
   normalizeActivityUnit(activityName, duration, modifier) {
-    return this.activityAttr[activityName];
+    const durationSecs =
+      +duration.split(":")[0] * 60 * 60 +
+      +duration.split(":")[1] * 60 +
+      +duration.split(":")[2];
+    const unitParts = this.activityAttr[activityName].unit.split(":");
+    const unitSecs =
+      +unitParts[0] * 60 * 60 + +unitParts[1] * 60 + +unitParts[2];
+    return (
+      (durationSecs / unitSecs) *
+      this.activityAttr[activityName].modifier[modifier]
+    );
   },
 };

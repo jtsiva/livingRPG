@@ -11,6 +11,19 @@ describe("hooks", function () {
         dex: 0,
         foc: 0,
         vit: 2,
+        unit: "00:30:00",
+        modifier: {
+          easy: 1,
+          speedwork: 1.5,
+          race: 2,
+        },
+      },
+      walking: {
+        str: 0,
+        dex: 0,
+        foc: 0,
+        vit: 1,
+        unit: "01:00:00",
         modifier: {
           easy: 1,
           speedwork: 1.5,
@@ -22,6 +35,7 @@ describe("hooks", function () {
         dex: 0,
         foc: 2,
         vit: 0,
+        unit: "00:20:30",
         modifier: {
           casual: 1,
           technical: 1.5,
@@ -32,6 +46,7 @@ describe("hooks", function () {
         dex: 1,
         foc: 1,
         vit: 0.5,
+        unit: "00:45:00",
         modifier: {
           easy: 1,
           hard: 1.5,
@@ -105,7 +120,7 @@ describe("hooks", function () {
   describe("Test normalizeActivityUnit", function () {
     it("Normalize 30 min time unit to 1", function () {
       expect(
-        activityAttributes.normalizeActivityUnit("yoga", "00:30:00")
+        activityAttributes.normalizeActivityUnit("running", "00:30:00", "easy")
       ).to.equal(1);
     });
   });
