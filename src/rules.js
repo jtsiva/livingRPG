@@ -12,4 +12,15 @@ export const rules = {
   activityMultiplier() {
     //take the duration, the unit duration, and intensity multiplier and return
   },
+  applyMultiplier(attributes, multiplier) {
+    //apply the given multiplier and return stats
+    return objectMap(attributes, (value) => value * multiplier);
+  },
 };
+
+const objectMap = (obj, fn) =>
+  Object.fromEntries(
+    Object.entries(obj).map(function ([key, value], i) {
+      return [key, fn(value, key, i)];
+    })
+  );

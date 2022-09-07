@@ -1,26 +1,22 @@
 import { activityAttrList } from "./activityList.js";
-
-const objectMap = (obj, fn) =>
-  Object.fromEntries(
-    Object.entries(obj).map(function ([key, value], i) {
-      return key != "unit" ? [key, fn(value, key, i)] : [key, value];
-    })
-  );
+import { rules } from "./rules.js";
 
 export const activityAttributes = {
   activityAttr: activityAttrList,
   getActivities() {
     return [];
   },
+  simplify(fullAttributes) {
+    return (({ str, dex, foc, vit }) => ({ str, dex, foc, vit }))(
+      fullAttributes
+    );
+  },
   getAttributes(activityName) {
     return this.activityAttr[activityName];
   },
   getAdjustedAttributes(activityName, normalizedUnit) {
     return activityName in this.activityAttr
-      ? objectMap(
-          this.activityAttr[activityName],
-          (value) => value * normalizedUnit
-        )
+      ? rules.applyMultiplier()
       : undefined;
   },
   normalizeActivityUnit(activityName, duration, modifier) {
