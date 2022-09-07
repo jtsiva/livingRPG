@@ -16,6 +16,6 @@ export function getAttributes(activityName, normalizedUnit) {
     : undefined;
 }
 
-export function normalizeActivityUnit(activityName, unit) {}
-
-// module.exports = { getAttributes, normalizeActivityUnit };
+export function normalizeActivityUnit(activityName, duration, modifier) {
+  return activityAttrList[activityName];
+}

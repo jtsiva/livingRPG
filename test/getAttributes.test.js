@@ -27,3 +27,9 @@ describe("Test getAttribute", function () {
     expect(getAttributes("swashbuckling", 1)).to.equal(undefined);
   });
 });
+
+describe("Test normalizeActivityUnit", function () {
+  it("Normalize 30 min time unit to 1", function () {
+    expect(normalizeActivityUnit("", "00:30:00")).to.equal(1);
+  });
+});
