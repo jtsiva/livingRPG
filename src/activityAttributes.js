@@ -23,9 +23,14 @@ export const activityAttributes = {
       : undefined;
   },
   calculateMultiplier(activityName, duration, modifierIndex) {
+    const durationSecs =
+      +activityDuration.split(":")[0] * 60 * 60 +
+      +activityDuration.split(":")[1] * 60 +
+      +activityDuration.split(":")[2];
+
     return rules.activityCap(
       rules.activityMultiplier(
-        duration,
+        durationSecs,
         this.activityAttr[activityName].unit,
         activityAttr[activityName].modifier[modifierIndex]
       )

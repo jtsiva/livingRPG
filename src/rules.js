@@ -22,16 +22,7 @@ export const rules = {
     return (6 * multiplier) / (multiplier + 1);
   },
   activityMultiplier(activityDuration, unitDuration, modifier) {
-    //take the duration, the unit duration, and intensity multiplier and return
-    const durationSecs =
-      +activityDuration.split(":")[0] * 60 * 60 +
-      +activityDuration.split(":")[1] * 60 +
-      +activityDuration.split(":")[2];
-
-    const unitSecs =
-      +unitDuration.split(":")[0] * 60 * 60 +
-      +unitDuration.split(":")[1] * 60 +
-      +unitDuration.split(":")[2];
+    //take the duration (seconds), the unit duration (seconds), and intensity multiplier and return
 
     return (durationSecs / unitSecs) * modifier;
   },

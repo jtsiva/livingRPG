@@ -9,7 +9,7 @@ describe("hooks", function () {
         dex: 0,
         foc: 0,
         vit: 2,
-        unit: "00:30:00",
+        unit: 1800,
         modifier: [{ easy: 1 }, { speedwork: 1.5 }, { race: 2 }],
       },
       walking: {
@@ -17,7 +17,7 @@ describe("hooks", function () {
         dex: 0,
         foc: 0,
         vit: 1,
-        unit: "01:00:00",
+        unit: 3600,
         modifier: [{ easy: 1 }, { hard: 1.5 }],
       },
       reading: {
@@ -25,7 +25,7 @@ describe("hooks", function () {
         dex: 0,
         foc: 2,
         vit: 0,
-        unit: "00:20:30",
+        unit: 1230,
         modifier: [{ casual: 1 }, { technical: 1.5 }],
       },
       yoga: {
@@ -33,7 +33,7 @@ describe("hooks", function () {
         dex: 1,
         foc: 1,
         vit: 0.5,
-        unit: "00:45:00",
+        unit: 2700,
         modifier: [{ easy: 1 }, { hard: 1.5 }],
       },
     };
