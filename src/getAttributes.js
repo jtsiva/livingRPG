@@ -8,7 +8,10 @@ const objectMap = (obj, fn) =>
   );
 
 export function getAttributes(activityName, normalizedUnit) {
-  return objectMap(activityAttrList[activityName], value * normalizedUnit);
+  return objectMap(
+    activityAttrList[activityName],
+    (value) => value * normalizedUnit
+  );
 }
 
 export function normalizeActivityUnit(activityName, unit) {}
