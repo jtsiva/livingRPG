@@ -7,7 +7,11 @@ const objectMap = (obj, fn) =>
     })
   );
 
-export function getAttributes(activityName, normalizedUnit) {
+export function getAttributes(activityName) {
+  return activityAttrList[activityName];
+}
+
+export function getAdjustedAttributes(activityName, normalizedUnit) {
   return activityName in activityAttrList
     ? objectMap(
         activityAttrList[activityName],
