@@ -1,7 +1,7 @@
 import { activityAttrList } from "./activityList.js";
 
 export function getAttributes(activityName, normalizedUnit) {
-  return activityAttrList.;
+  return activityAttrList[activityName];
 }
 
 export function normalizeActivityUnit(activityName, unit) {}

@@ -3,9 +3,9 @@ import { expect } from "chai";
 
 describe("Test getAttribute", function () {
   it("Get attributes for Running", function () {
-    getAttributes("running", 1).str.should.equal(1);
-    getAttributes("running", 1).dex.should.equal(0);
-    getAttributes("running", 1).foc.should.equal(0);
-    getAttributes("running", 1).vit.should.equal(2);
+    expect(getAttributes("running", 1).str).to.equal(1);
+    expect(getAttributes("running", 1).dex).to.equal(0);
+    expect(getAttributes("running", 1).foc).to.equal(0);
+    expect(getAttributes("running", 1).vit).to.equal(2);
   });
 });
