@@ -14,22 +14,21 @@ export const activityAttributes = {
   getAttributes(activityName) {
     return this.activityAttr[activityName];
   },
-  getAdjustedAttributes(activityName, normalizedUnit) {
+  getAdjustedAttributes(activityName, multiplier) {
     return activityName in this.activityAttr
-      ? rules.applyMultiplier()
+      ? rules.applyMultiplier(
+          this.simplify(this.activityAttr[activityName]),
+          multiplier
+        )
       : undefined;
   },
-  normalizeActivityUnit(activityName, duration, modifier) {
-    const durationSecs =
-      +duration.split(":")[0] * 60 * 60 +
-      +duration.split(":")[1] * 60 +
-      +duration.split(":")[2];
-    const unitParts = this.activityAttr[activityName].unit.split(":");
-    const unitSecs =
-      +unitParts[0] * 60 * 60 + +unitParts[1] * 60 + +unitParts[2];
-    return (
-      (durationSecs / unitSecs) *
-      this.activityAttr[activityName].modifier[modifier]
+  calculateMultiplier(activityName, duration, modifierIndex) {
+    return rules.activityCap(
+      rules.activityMultiplier(
+        duration,
+        this.activityAttr[activityName].unit,
+        activityAttr[activityName].modifier[modifierIndex]
+      )
     );
   },
 };
