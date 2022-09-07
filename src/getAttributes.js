@@ -1,7 +1,14 @@
 import { activityAttrList } from "./activityList.js";
 
+const objectMap = (obj, fn) =>
+  Object.fromEntries(
+    Object.entries(obj).map(function ([key, value], i) {
+      return key != "unit" ? [key, fn(value, key, i)] : [key, value];
+    })
+  );
+
 export function getAttributes(activityName, normalizedUnit) {
-  return activityAttrList[activityName];
+  return objectMap(activityAttrList[activityName], value * normalizedUnit);
 }
 
 export function normalizeActivityUnit(activityName, unit) {}
