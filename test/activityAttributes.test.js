@@ -1,8 +1,6 @@
 import { activityAttributes } from "../src/activityAttributes.js";
 import { expect } from "chai";
 
-//TODO: figure out how to separately test data and functions
-
 describe("hooks", function () {
   before(function () {
     activityAttributes.activityAttr = {
