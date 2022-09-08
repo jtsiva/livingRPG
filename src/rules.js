@@ -1,16 +1,19 @@
 export const rules = {
   maxStat: 100,
+  progressionModifier: 100,
   maxMultiplier: 6,
   statCap(existingAttributes, newAttributes) {
     //takes a set of stats and a desired addition and
     //calculates and returns final updated stats
     //adjusted with a stat cap of 100 (asymptotic)
+    const self = this;
     return Object.fromEntries(
       Object.entries(existingAttributes).map(function ([key, value], i) {
         return [
           key,
-          (this.maxStat * value + this.maxStat * newAttributes[key]) /
-            (value + newAttributes[key] + 1),
+          value +
+            (self.maxStat * newAttributes[key]) /
+              (newAttributes[key] + self.progressionModifier),
         ];
       })
     );
