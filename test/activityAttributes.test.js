@@ -39,6 +39,49 @@ describe("activityAttributes.js", function () {
     };
   });
 
+  describe("Test getActivities", function () {
+    it("Length of activities", function () {
+      expect(activityAttributes.getActivities().length).to.equal(4);
+    });
+  });
+
+  describe("Test simplify", function () {
+    it("Reduce keys to str, dex, foc, vit", function () {
+      expect(
+        Object.keys(
+          activityAttributes.simplify(activityAttributes.activityAttr.running)
+        ).length
+      ).to.equal(4);
+      expect(
+        ["str", "dex", "foc", "vit"].every((key) =>
+          Object.keys(
+            activityAttributes.simplify(activityAttributes.activityAttr.running)
+          ).includes(key)
+        )
+      );
+    });
+    it("Reduce already reduced", function () {
+      expect(
+        Object.keys(
+          activityAttributes.simplify(
+            activityAttributes.simplify(activityAttributes.activityAttr.running)
+          )
+        ).length
+      ).to.equal(4);
+      expect(
+        ["str", "dex", "foc", "vit"].every((key) =>
+          Object.keys(
+            activityAttributes.simplify(
+              activityAttributes.simplify(
+                activityAttributes.activityAttr.running
+              )
+            )
+          ).includes(key)
+        )
+      );
+    });
+  });
+
   describe("Test getAttributes", function () {
     it("Get attribute information for an activity (running)", function () {
       expect(activityAttributes.getAttributes("running").str).to.equal(1);
