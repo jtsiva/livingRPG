@@ -2,7 +2,14 @@ import { activityAttributes } from "../src/activityAttributes.js";
 import { expect } from "chai";
 
 describe("activityAttributes.js", function () {
+  let myAttr;
   before(function () {
+    myAttr = {
+      str: 0,
+      dex: 0,
+      foc: 0,
+      vit: 0,
+    };
     activityAttributes.activityAttr = {
       running: {
         str: 1,
@@ -82,34 +89,44 @@ describe("activityAttributes.js", function () {
     });
   });
 
-  describe("Test getAttributes", function () {
-    it("Get attribute information for an activity (running)", function () {
-      expect(activityAttributes.getAttributes("running").str).to.equal(1);
-      expect(activityAttributes.getAttributes("running").dex).to.equal(0);
-      expect(activityAttributes.getAttributes("running").foc).to.equal(0);
-      expect(activityAttributes.getAttributes("running").vit).to.equal(2);
+  describe("Test calculateMultiplier", function () {
+    it("0 duration running", function () {
+      expect(
+        activityAttributes.calculateMultiplier("running", "00:00:00", 0)
+      ).to.equal(0);
     });
-    it("Get nonexistent activity", function () {
-      expect(activityAttributes.getAttributes("swashbuckling")).to.equal(
-        undefined
+
+    it("1.5 unit duration equals modifier=1.5 running", function () {
+      expect(
+        activityAttributes.calculateMultiplier("running", "00:45:00", 0)
+      ).to.equal(
+        activityAttributes.calculateMultiplier("running", "00:30:00", 1)
+      );
+    });
+
+    it("2 unit duration equals modifier=2 running", function () {
+      expect(
+        activityAttributes.calculateMultiplier("running", "01:00:00", 0)
+      ).to.equal(
+        activityAttributes.calculateMultiplier("running", "00:30:00", 2)
       );
     });
   });
 
-  describe("Test adjustAttributes", function () {
-    it("Get attributes for running", function () {
-      expect(activityAttributes.adjustAttributes("running", 1).str).to.equal(1);
-      expect(activityAttributes.adjustAttributes("running", 1).dex).to.equal(0);
-      expect(activityAttributes.adjustAttributes("running", 1).foc).to.equal(0);
-      expect(activityAttributes.adjustAttributes("running", 1).vit).to.equal(2);
+  describe("Test updateAttributes", function () {
+    it("Activity should increase all stats", function () {
+      expect(
+        activityAttributes.updateAttributes(myAttr, "yoga", "00:45:00", 0).str
+      ).to.greaterThan(myAttr.str);
+      expect(
+        activityAttributes.updateAttributes(myAttr, "yoga", "00:45:00", 0).dex
+      ).to.greaterThan(myAttr.dex);
+      expect(
+        activityAttributes.updateAttributes(myAttr, "yoga", "00:45:00", 0).foc
+      ).to.greaterThan(myAttr.foc);
+      expect(
+        activityAttributes.updateAttributes(myAttr, "yoga", "00:45:00", 0).vit
+      ).to.greaterThan(myAttr.vit);
     });
   });
-
-  // describe("Test normalizeActivityUnit", function () {
-  //   it("Normalize 30 min time unit to 1", function () {
-  //     expect(
-  //       activityAttributes.normalizeActivityUnit("running", "00:30:00", "easy")
-  //     ).to.equal(1);
-  //   });
-  // });
 });

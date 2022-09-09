@@ -14,13 +14,14 @@ export const activityAttributes = {
   getAttributes(activityName) {
     return this.activityAttr[activityName];
   },
-  adjustAttributes(activityName, multiplier) {
-    return activityName in this.activityAttr
-      ? rules.applyMultiplier(
-          this.simplify(this.activityAttr[activityName]),
-          multiplier
-        )
-      : undefined;
+  updateAttributes(existingAttributes, activityName, duration, modifierIndex) {
+    return rules.statCap(
+      existingAttributes,
+      rules.applyMultiplier(
+        this.simplify(this.activityAttr[activityName]),
+        this.calculateMultiplier(activityName, duration, modifierIndex)
+      )
+    );
   },
   calculateMultiplier(activityName, duration, modifierIndex) {
     const durationSecs =
@@ -32,7 +33,9 @@ export const activityAttributes = {
       rules.activityMultiplier(
         durationSecs,
         this.activityAttr[activityName].unit,
-        activityAttr[activityName].modifier[modifierIndex]
+        Object.values(
+          this.activityAttr[activityName].modifier[modifierIndex]
+        )[0]
       )
     );
   },
