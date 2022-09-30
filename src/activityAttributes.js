@@ -33,9 +33,7 @@ export const activityAttributes = {
       rules.activityMultiplier(
         durationSecs,
         this.activityAttr[activityName].unit,
-        Object.values(
-          this.activityAttr[activityName].modifier[modifierIndex]
-        )[0]
+        this.activityAttr[activityName].modifier[modifierIndex].value
       )
     );
   },

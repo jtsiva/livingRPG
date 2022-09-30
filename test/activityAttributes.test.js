@@ -17,7 +17,11 @@ describe("activityAttributes.js", function () {
         foc: 0,
         vit: 2,
         unit: 1800,
-        modifier: [{ easy: 1 }, { speedwork: 1.5 }, { race: 2 }],
+        modifier: [
+          { label: "easy", value: 1 },
+          { label: "speedwork", value: 1.5 },
+          { label: "race", value: 2 },
+        ],
       },
       walking: {
         str: 0,
@@ -25,7 +29,10 @@ describe("activityAttributes.js", function () {
         foc: 0,
         vit: 1,
         unit: 3600,
-        modifier: [{ easy: 1 }, { hard: 1.5 }],
+        modifier: [
+          { label: "easy", value: 1 },
+          { label: "hard", value: 1.5 },
+        ],
       },
       reading: {
         str: 0,
@@ -33,7 +40,10 @@ describe("activityAttributes.js", function () {
         foc: 2,
         vit: 0,
         unit: 1230,
-        modifier: [{ casual: 1 }, { technical: 1.5 }],
+        modifier: [
+          { label: "casual", value: 1 },
+          { label: "technical", value: 1.5 },
+        ],
       },
       yoga: {
         str: 1,
@@ -41,7 +51,10 @@ describe("activityAttributes.js", function () {
         foc: 1,
         vit: 0.5,
         unit: 2700,
-        modifier: [{ easy: 1 }, { hard: 1.5 }],
+        modifier: [
+          { label: "easy", value: 1 },
+          { label: "hard", value: 1.5 },
+        ],
       },
     };
   });
