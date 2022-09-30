@@ -3,7 +3,7 @@ import { expect } from "chai";
 
 describe("Testing for activityHistory", () => {
   let log;
-  before(() => {
+  beforeEach(() => {
     log = [];
   });
 

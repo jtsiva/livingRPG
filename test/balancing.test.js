@@ -1,4 +1,5 @@
 import { activityAttributes } from "../src/activityAttributes.js";
+import { activityAttrList } from "../src/activityList.js";
 import { expect } from "chai";
 
 describe("Rules and activity balancing", function () {
@@ -14,11 +15,58 @@ describe("Rules and activity balancing", function () {
     };
   });
 
+  const simpleAttrAdd = function (existingAttributes, newAttributes) {
+    return Object.fromEntries(
+      Object.entries(existingAttributes).map(function ([key, value], i) {
+        return [key, value + newAttributes[key]];
+      })
+    );
+  };
+
   describe("Check that activities are balanced", function () {
-    //Each stat should be well-represented across the
-    //activities. Sum of each (str, dex, foc, vit) across
-    //all activities should be roughly equal
-    //(<10% from others)
+    it("Even representation of stats", function () {
+      //Each stat should be well-represented across the
+      //activities. Sum of each (str, dex, foc, vit) across
+      //all activities should be roughly equal
+      //(<10% from average of all)
+
+      Object.entries(activityAttrList).map(function (
+        [activityName, activityAttr],
+        i
+      ) {
+        myAttr = simpleAttrAdd(
+          myAttr,
+          activityAttributes.simplify(activityAttr)
+        );
+        // console.log(obj);
+        return myAttr;
+      });
+
+      //No reason to get nit-picky with decimals
+      const avg = Math.round(
+        Object.entries(myAttr).reduce((sum, attr) => sum + attr[1], 0) /
+          Object.keys(myAttr).length
+      );
+
+      const bound = Math.ceil(0.1 * avg);
+
+      Object.entries(myAttr).forEach(function (entry) {
+        try {
+          expect(entry[1]).to.lte(avg + bound);
+        } catch (e) {
+          e.message = `${entry[0]} is too high`;
+          throw e;
+        }
+
+        try {
+          expect(entry[1]).to.gte(avg - bound);
+        } catch (e) {
+          e.message = `${entry[0]} is too low`;
+          throw e;
+        }
+      });
+    });
+
     //100 hours of each activity (applied at unit duration)
     //should put stats within the same general area
     //(+/- 10% of average).. highest stat value maybe?
