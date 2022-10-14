@@ -76,6 +76,40 @@ describe("Rules and activity balancing", function () {
       //e.g. act1 * 100 => str : 100 , act2 * 100 => dex :98 is good
       //act1 * 100 => str : 100 , act2 * 100 => dex :50 is not great
       //display outlier activities
+
+      const MAX_APPLICATION = 100;
+      const TOLERANCE = 0.1;
+
+      let sum = 0;
+      let record = [];
+
+      Object.entries(activityAttrList).forEach(function (entry) {
+        for (let i = 0; i < MAX_APPLICATION; i++) {
+          myAttr = simpleAttrAdd(myAttr, activityAttributes.simplify(entry[1]));
+        }
+        let arr = Object.values(obj);
+        let max = Math.max(...arr);
+        sum += max;
+        record.push({ name: entry[0], max: max });
+      });
+
+      let avg = sum / Object.keys(activityAttrList).length;
+
+      for (entry in record) {
+        try {
+          expect(entry[1]).to.lte(avg + bound);
+        } catch (e) {
+          e.message = `${entry[0]} is too high`;
+          throw e;
+        }
+
+        try {
+          expect(entry[1]).to.gte(avg - bound);
+        } catch (e) {
+          e.message = `${entry[0]} is too low`;
+          throw e;
+        }
+      }
     });
   });
 
