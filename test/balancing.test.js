@@ -67,9 +67,16 @@ describe("Rules and activity balancing", function () {
       });
     });
 
-    //100 hours of each activity (applied at unit duration)
+    //100 applications of unit duration for each activity
     //should put stats within the same general area
     //(+/- 10% of average).. highest stat value maybe?
+    it("Balanced activities at low intensity", function () {
+      //for each activity, add at unit duration and low intensity
+      //x100, check that highest stat point is close to other activity's max
+      //e.g. act1 * 100 => str : 100 , act2 * 100 => dex :98 is good
+      //act1 * 100 => str : 100 , act2 * 100 => dex :50 is not great
+      //display outlier activities
+    });
   });
 
   describe("Check for stat cap reasonableness", function () {
